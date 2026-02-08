@@ -10,7 +10,7 @@
 body{
     background:#f1f5f9;
 }
-{ display:none; }
+#dashboard{ display:none; }
 .section{ display:none; }
 .card{
     border-radius:12px;
@@ -85,6 +85,7 @@ body{
     </div>
 </div>
 
+
 <div class="section" id="adminSection">
     <h4> Admin Dashboard</h4>
 
@@ -102,9 +103,12 @@ body{
         <p>Total Courses: 15</p>
     </div>
 </div>
+
 <button class="btn btn-danger mt-4" onclick="logout()">Logout</button>
+
 </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
