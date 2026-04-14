@@ -11,14 +11,13 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        // ✅ validation
+        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
             'role' => 'required'
         ]);
 
-        // ✅ role wise login
         if (Auth::attempt([
             'email' => $request->email,
             'password' => $request->password,
