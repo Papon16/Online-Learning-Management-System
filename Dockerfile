@@ -1,6 +1,26 @@
+
+# ==========================================
+# Stage 1: Build frontend assets
+# ==========================================
+FROM node:22-alpine AS frontend
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY . .
+
+RUN npm run build
+
+
+# ==========================================
+# Stage 2: Laravel + Apache
+# ==========================================
 FROM php:8.2-apache
 
-# System dependencies
+# Install required packages
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -8,42 +28,68 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libzip-dev \
     zip \
-    nodejs \
-    npm \
-    && docker-php-ext-install pdo pdo_pgsql zip \
+    && docker-php-ext-install \
+        pdo \
+        pdo_pgsql \
+        zip \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+
+# Laravel working directory
 WORKDIR /var/www/html
+
 
 # Copy Laravel project
 COPY . .
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install JS dependencies and build Vite
-RUN npm ci
-RUN npm run build
+# Install Laravel PHP dependencies
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction \
+    --no-scripts
 
-# Laravel storage link
-RUN php artisan storage:link
 
-# Apache should serve Laravel public folder
-RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#' /etc/apache2/sites-available/000-default.conf
+# Copy Vite built assets
+COPY --from=frontend /app/public/build ./public/build
 
-RUN sed -i '/<VirtualHost \*:80>/a \
-    <Directory /var/www/html/public>\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>' /etc/apache2/sites-available/000-default.conf
 
-# Permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Configure Apache to use Laravel public directory
+RUN sed -i 's#DocumentRoot /var/www/html#DocumentRoot /var/www/html/public#' \
+    /etc/apache2/sites-available/000-default.conf
+
+
+# Allow Laravel .htaccess
+RUN printf '%s\n' \
+    '<Directory /var/www/html/public>' \
+    '    AllowOverride All' \
+    '    Require all granted' \
+    '</Directory>' \
+    >> /etc/apache2/sites-available/000-default.conf
+
+
+# Laravel storage and cache permissions
+RUN mkdir -p storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache \
+    && chown -R www-data:www-data \
+        storage \
+        bootstrap/cache \
+    && chmod -R 775 \
+        storage \
+        bootstrap/cache
+
+
+# Create storage link when container starts
+CMD ["bash", "-c", "php artisan storage:link || true && php artisan package:discover --ansi && apache2-foreground"]
+
 
 EXPOSE 80
-
-CMD ["apache2-foreground"]
