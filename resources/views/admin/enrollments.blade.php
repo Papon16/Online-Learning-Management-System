@@ -5,9 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Manage Courses - LearnHub</title>
+    <title>Manage Enrollments - LearnHub</title>
 
     <style>
 
@@ -40,9 +41,7 @@
 
         .sidebar {
             width: 250px;
-
             background: #111c2d;
-
             color: white;
 
             position: fixed;
@@ -457,39 +456,6 @@
 
 
         /* =====================================================
-           ALERT
-        ====================================================== */
-
-        .alert {
-            padding: 12px 15px;
-
-            border-radius: 8px;
-
-            margin-bottom: 18px;
-
-            font-size: 12px;
-        }
-
-
-        .alert-success {
-            background: #ecfdf5;
-
-            color: #047857;
-
-            border: 1px solid #a7f3d0;
-        }
-
-
-        .alert-error {
-            background: #fef2f2;
-
-            color: #b91c1c;
-
-            border: 1px solid #fecaca;
-        }
-
-
-        /* =====================================================
            STAT CARDS
         ====================================================== */
 
@@ -584,43 +550,31 @@
 
         .blue .stat-icon {
             background: #eaf3ff;
-
             color: #2563eb;
-        }
-
-
-        .orange .stat-icon {
-            background: #fff5e8;
-
-            color: #f59e0b;
         }
 
 
         .green .stat-icon {
             background: #e8fbf3;
-
             color: #10b981;
+        }
+
+
+        .light-blue .stat-icon {
+            background: #eaf3ff;
+            color: #2563eb;
         }
 
 
         .red .stat-icon {
             background: #fff0f1;
-
             color: #ef4444;
         }
 
 
-        .blue .stat-growth {
-            color: #10b981;
-        }
-
-
-        .orange .stat-growth {
-            color: #f59e0b;
-        }
-
-
-        .green .stat-growth {
+        .blue .stat-growth,
+        .green .stat-growth,
+        .light-blue .stat-growth {
             color: #10b981;
         }
 
@@ -631,10 +585,10 @@
 
 
         /* =====================================================
-           COURSE CARD
+           ENROLLMENT CARD
         ====================================================== */
 
-        .courses-card {
+        .enrollment-card {
             background: white;
 
             border: 1px solid #e6ebf2;
@@ -648,7 +602,7 @@
         }
 
 
-        .courses-header {
+        .enrollment-header {
             padding: 18px 20px;
 
             display: flex;
@@ -661,7 +615,7 @@
         }
 
 
-        .courses-header h2 {
+        .enrollment-header h2 {
             font-size: 16px;
 
             color: #111827;
@@ -670,14 +624,14 @@
         }
 
 
-        .courses-header p {
+        .enrollment-header p {
             font-size: 10px;
 
             color: #94a3b8;
         }
 
 
-        .course-tools {
+        .tools {
             display: flex;
 
             align-items: center;
@@ -686,12 +640,12 @@
         }
 
 
-        .search-wrapper {
+        .search-box {
             position: relative;
         }
 
 
-        .search-icon {
+        .search-box span {
             position: absolute;
 
             left: 10px;
@@ -707,7 +661,7 @@
 
 
         .search-input {
-            width: 215px;
+            width: 245px;
 
             height: 37px;
 
@@ -741,16 +695,16 @@
 
             color: #475569;
 
-            outline: none;
-
             background: white;
+
+            outline: none;
         }
 
 
-        .refresh-btn {
+        .export-btn {
             height: 37px;
 
-            padding: 0 14px;
+            padding: 0 15px;
 
             border: none;
 
@@ -762,13 +716,13 @@
 
             font-size: 11px;
 
-            cursor: pointer;
-
             font-weight: 600;
+
+            cursor: pointer;
         }
 
 
-        .refresh-btn:hover {
+        .export-btn:hover {
             background: #1d4ed8;
         }
 
@@ -782,7 +736,7 @@
         }
 
 
-        .courses-table {
+        .enrollment-table {
             width: 100%;
 
             border-collapse: collapse;
@@ -791,7 +745,7 @@
         }
 
 
-        .courses-table th {
+        .enrollment-table th {
             text-align: left;
 
             padding: 12px 15px;
@@ -808,7 +762,7 @@
         }
 
 
-        .courses-table td {
+        .enrollment-table td {
             padding: 12px 15px;
 
             border-top: 1px solid #eef1f5;
@@ -821,85 +775,21 @@
         }
 
 
-        .courses-table tbody tr {
+        .enrollment-table tbody tr {
             transition: .15s;
         }
 
 
-        .courses-table tbody tr:hover {
+        .enrollment-table tbody tr:hover {
             background: #f9fbff;
         }
 
 
         /* =====================================================
-           THUMBNAIL
+           STUDENT
         ====================================================== */
 
-        .course-thumbnail {
-            width: 60px;
-            height: 42px;
-
-            border-radius: 6px;
-
-            overflow: hidden;
-
-            background: #eaf3ff;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 18px;
-
-            color: #2563eb;
-        }
-
-
-        .course-thumbnail img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-
-        /* =====================================================
-           COURSE TITLE
-        ====================================================== */
-
-        .course-title {
-            font-size: 12px;
-
-            font-weight: 700;
-
-            color: #111827;
-
-            margin-bottom: 4px;
-        }
-
-
-        .course-description {
-            max-width: 210px;
-
-            color: #94a3b8;
-
-            font-size: 9px;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
-        }
-
-
-        /* =====================================================
-           TEACHER
-        ====================================================== */
-
-        .teacher-cell {
+        .student-cell {
             display: flex;
 
             align-items: center;
@@ -908,9 +798,9 @@
         }
 
 
-        .teacher-avatar {
-            width: 30px;
-            height: 30px;
+        .student-avatar {
+            width: 32px;
+            height: 32px;
 
             border-radius: 50%;
 
@@ -926,19 +816,21 @@
             font-size: 11px;
 
             font-weight: 700;
+
+            flex-shrink: 0;
         }
 
 
-        .teacher-name {
+        .student-name {
             color: #111827;
 
-            font-weight: 600;
-
             font-size: 11px;
+
+            font-weight: 700;
         }
 
 
-        .teacher-email {
+        .student-email {
             color: #94a3b8;
 
             font-size: 8px;
@@ -948,36 +840,118 @@
 
 
         /* =====================================================
-           CATEGORY
+           COURSE
         ====================================================== */
 
-        .category-badge {
+        .course-cell {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .course-thumb {
+            width: 57px;
+            height: 40px;
+
+            border-radius: 6px;
+
+            background: #eaf3ff;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #2563eb;
+
+            font-size: 17px;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+        }
+
+
+        .course-thumb img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .course-name {
+            color: #111827;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            margin-bottom: 4px;
+        }
+
+
+        .category {
             display: inline-block;
 
-            padding: 5px 9px;
+            padding: 4px 8px;
 
             border-radius: 7px;
 
-            font-size: 9px;
+            background: #eee8ff;
+
+            color: #6d28d9;
+
+            font-size: 8px;
 
             font-weight: 600;
-
-            background: #f0eaff;
-
-            color: #7c3aed;
         }
 
 
         /* =====================================================
-           PRICE
+           PROGRESS
         ====================================================== */
 
-        .price {
-            color: #475569;
+        .progress-wrapper {
+            display: flex;
 
-            font-size: 11px;
+            align-items: center;
 
-            font-weight: 600;
+            gap: 8px;
+        }
+
+
+        .progress-bar {
+            width: 105px;
+
+            height: 8px;
+
+            background: #e8edf3;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+            height: 100%;
+
+            background: #3182f6;
+
+            border-radius: 20px;
+        }
+
+
+        .progress-text {
+            font-size: 10px;
+
+            color: #64748b;
+
+            min-width: 30px;
         }
 
 
@@ -985,20 +959,20 @@
            STATUS
         ====================================================== */
 
-        .status-badge {
+        .status {
             display: inline-flex;
 
             align-items: center;
 
             gap: 5px;
 
-            padding: 5px 9px;
+            padding: 6px 10px;
 
-            border-radius: 20px;
+            border-radius: 7px;
 
             font-size: 9px;
 
-            font-weight: 700;
+            font-weight: 600;
         }
 
 
@@ -1010,39 +984,39 @@
         }
 
 
-        .pending {
-            background: #fff5e5;
-
-            color: #d97706;
-        }
-
-
-        .pending .status-dot {
-            background: #f59e0b;
-        }
-
-
-        .approved {
-            background: #e8faf2;
+        .status-active {
+            background: #e5f8ef;
 
             color: #059669;
         }
 
 
-        .approved .status-dot {
+        .status-active .status-dot {
             background: #10b981;
         }
 
 
-        .rejected {
-            background: #ffedef;
+        .status-completed {
+            background: #e9f2ff;
 
-            color: #dc2626;
+            color: #2563eb;
         }
 
 
-        .rejected .status-dot {
-            background: #ef4444;
+        .status-completed .status-dot {
+            background: #2563eb;
+        }
+
+
+        .status-cancelled {
+            background: #fff1df;
+
+            color: #d97706;
+        }
+
+
+        .status-cancelled .status-dot {
+            background: #f59e0b;
         }
 
 
@@ -1053,59 +1027,44 @@
         .actions {
             display: flex;
 
-            align-items: center;
-
             gap: 6px;
         }
 
 
-        .action-btn {
-            height: 31px;
-
-            padding: 0 10px;
+        .view-btn,
+        .delete-btn {
+            width: 34px;
+            height: 34px;
 
             border-radius: 7px;
 
-            border: none;
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
 
             cursor: pointer;
 
-            font-size: 9px;
-
-            font-weight: 600;
-
-            transition: .2s;
+            font-size: 13px;
         }
 
 
-        .approve-btn {
-            background: #e7f9f1;
+        .view-btn {
+            border: 1px solid #dce3eb;
 
-            color: #059669;
+            background: white;
+
+            color: #475569;
         }
 
 
-        .approve-btn:hover {
-            background: #d1fae5;
-        }
-
-
-        .reject-btn {
-            background: #fff1e8;
-
-            color: #ea580c;
-        }
-
-
-        .reject-btn:hover {
-            background: #ffedd5;
+        .view-btn:hover {
+            background: #f1f5f9;
         }
 
 
         .delete-btn {
-            width: 32px;
-
-            padding: 0;
+            border: none;
 
             background: #ef3340;
 
@@ -1186,7 +1145,7 @@
         }
 
 
-        .empty-state-icon {
+        .empty-icon {
             font-size: 40px;
 
             margin-bottom: 10px;
@@ -1197,15 +1156,11 @@
            RESPONSIVE
         ====================================================== */
 
-        @media(max-width: 1150px) {
+        @media(max-width: 1100px) {
 
             .stats-grid {
                 grid-template-columns:
                     repeat(2, 1fr);
-            }
-
-            .course-tools {
-                flex-wrap: wrap;
             }
 
         }
@@ -1217,11 +1172,6 @@
                 transform: translateX(-100%);
 
                 transition: .25s;
-            }
-
-
-            .sidebar.open {
-                transform: translateX(0);
             }
 
 
@@ -1256,7 +1206,7 @@
             }
 
 
-            .courses-header {
+            .enrollment-header {
                 flex-direction: column;
 
                 align-items: flex-start;
@@ -1265,13 +1215,10 @@
             }
 
 
-            .course-tools {
+            .tools {
                 width: 100%;
-            }
 
-
-            .search-input {
-                width: 180px;
+                flex-wrap: wrap;
             }
 
         }
@@ -1358,40 +1305,6 @@
             </a>
 
 
-            <!-- USER SUBMENU -->
-
-            @if(request()->routeIs('admin.users*'))
-
-                <div class="submenu">
-
-                    <a href="{{ route('admin.users') }}"
-                       class="{{ request()->routeIs('admin.users') ? 'active' : '' }}">
-
-                        <span class="submenu-dot">
-                            ●
-                        </span>
-
-                        All Users
-
-                    </a>
-
-
-                    <a href="#"
-                       onclick="return false;">
-
-                        <span class="submenu-dot">
-                            ○
-                        </span>
-
-                        Create User
-
-                    </a>
-
-                </div>
-
-            @endif
-
-
             <!-- COURSES -->
 
             <a href="{{ route('admin.courses') }}"
@@ -1405,38 +1318,17 @@
                 Courses
 
                 <span class="menu-arrow">
-                    ⌃
+                    ›
                 </span>
 
             </a>
 
 
-            <!-- COURSE SUBMENU -->
-
-            @if(request()->routeIs('admin.courses'))
-
-                <div class="submenu">
-
-                    <a href="{{ route('admin.courses') }}"
-                       class="active">
-
-                        <span class="submenu-dot">
-                            ●
-                        </span>
-
-                        All Courses
-
-                    </a>
-
-                </div>
-
-            @endif
-
-
             <!-- ENROLLMENTS -->
 
-            <a href="#"
-               class="menu-item">
+            <a href="{{ route('admin.enrollments') }}"
+               class="menu-item
+               {{ request()->routeIs('admin.enrollments') ? 'active' : '' }}">
 
                 <span class="menu-icon">
                     🏅
@@ -1444,7 +1336,33 @@
 
                 Enrollments
 
+                <span class="menu-arrow">
+                    ⌃
+                </span>
+
             </a>
+
+
+            <!-- SUBMENU -->
+
+            @if(request()->routeIs('admin.enrollments'))
+
+                <div class="submenu">
+
+                    <a href="{{ route('admin.enrollments') }}"
+                       class="active">
+
+                        <span class="submenu-dot">
+                            ●
+                        </span>
+
+                        All Enrollments
+
+                    </a>
+
+                </div>
+
+            @endif
 
 
             <!-- ASSIGNMENTS -->
@@ -1547,13 +1465,14 @@
 
             </form>
 
+
         </div>
 
     </aside>
 
 
     <!-- =====================================================
-         MAIN CONTENT
+         MAIN
     ====================================================== -->
 
     <main class="main-content">
@@ -1569,7 +1488,7 @@
                 Dashboard /
 
                 <strong>
-                    Courses
+                    Enrollments
                 </strong>
 
             </div>
@@ -1578,30 +1497,17 @@
             <div class="topbar-right">
 
 
-                <!-- NOTIFICATION -->
-
                 <button class="notification-button">
 
                     🔔
 
-                    @php
-
-                        $pendingNotificationCount =
-                            \App\Models\Course::where(
-                                'status',
-                                'pending'
-                            )->count();
-
-                    @endphp
-
-
-                    @if($pendingNotificationCount > 0)
+                    @if($totalEnrollments > 0)
 
                         <span class="notification-badge">
 
-                            {{ $pendingNotificationCount > 9
+                            {{ $totalEnrollments > 9
                                 ? '9+'
-                                : $pendingNotificationCount }}
+                                : $totalEnrollments }}
 
                         </span>
 
@@ -1609,8 +1515,6 @@
 
                 </button>
 
-
-                <!-- PROFILE -->
 
                 <button class="profile-button">
 
@@ -1662,34 +1566,10 @@
 
 
         <!-- =====================================================
-             PAGE CONTENT
+             PAGE
         ====================================================== -->
 
         <section class="page-content">
-
-
-            <!-- ALERT -->
-
-            @if(session('success'))
-
-                <div class="alert alert-success">
-
-                    {{ session('success') }}
-
-                </div>
-
-            @endif
-
-
-            @if(session('error'))
-
-                <div class="alert alert-error">
-
-                    {{ session('error') }}
-
-                </div>
-
-            @endif
 
 
             <!-- PAGE TITLE -->
@@ -1697,18 +1577,18 @@
             <div class="page-heading">
 
                 <div class="page-title-icon">
-                    📖
+                    🏅
                 </div>
 
 
                 <div>
 
                     <h1>
-                        Manage Courses
+                        Manage Enrollments
                     </h1>
 
                     <p>
-                        Review, approve, reject, and manage courses submitted by teachers
+                        View and manage all student enrollments in courses
                     </p>
 
                 </div>
@@ -1732,24 +1612,26 @@
                         <div>
 
                             <h3>
-                                Total Courses
+                                Total Enrollments
                             </h3>
 
                             <div class="stat-number">
 
-                                {{ $courses->count() }}
+                                {{ $totalEnrollments }}
 
                             </div>
 
                             <div class="stat-growth">
-                                ↑ All courses
+
+                                ↑ All enrollments
+
                             </div>
 
                         </div>
 
 
                         <div class="stat-icon">
-                            📖
+                            👥
                         </div>
 
                     </div>
@@ -1757,41 +1639,7 @@
                 </div>
 
 
-                <!-- PENDING -->
-
-                <div class="stat-card orange">
-
-                    <div class="stat-top">
-
-                        <div>
-
-                            <h3>
-                                Pending
-                            </h3>
-
-                            <div class="stat-number">
-
-                                {{ $courses->where('status', 'pending')->count() }}
-
-                            </div>
-
-                            <div class="stat-growth">
-                                ↑ Awaiting review
-                            </div>
-
-                        </div>
-
-
-                        <div class="stat-icon">
-                            🕐
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- APPROVED -->
+                <!-- ACTIVE -->
 
                 <div class="stat-card green">
 
@@ -1800,17 +1648,55 @@
                         <div>
 
                             <h3>
-                                Approved
+                                Active Enrollments
                             </h3>
 
                             <div class="stat-number">
 
-                                {{ $courses->where('status', 'approved')->count() }}
+                                {{ $activeEnrollments }}
 
                             </div>
 
                             <div class="stat-growth">
-                                ↑ Published courses
+
+                                ↑ Currently learning
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="stat-icon">
+                            ▶
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPLETED -->
+
+                <div class="stat-card light-blue">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <h3>
+                                Completed
+                            </h3>
+
+                            <div class="stat-number">
+
+                                {{ $completedEnrollments }}
+
+                            </div>
+
+                            <div class="stat-growth">
+
+                                ↑ Finished courses
+
                             </div>
 
                         </div>
@@ -1825,7 +1711,7 @@
                 </div>
 
 
-                <!-- REJECTED -->
+                <!-- CANCELLED -->
 
                 <div class="stat-card red">
 
@@ -1834,17 +1720,19 @@
                         <div>
 
                             <h3>
-                                Rejected
+                                Cancelled
                             </h3>
 
                             <div class="stat-number">
 
-                                {{ $courses->where('status', 'rejected')->count() }}
+                                {{ $cancelledEnrollments }}
 
                             </div>
 
                             <div class="stat-growth">
-                                ↑ Rejected courses
+
+                                ↑ Cancelled enrollments
+
                             </div>
 
                         </div>
@@ -1862,51 +1750,51 @@
 
 
             <!-- =================================================
-                 ALL COURSES
+                 TABLE CARD
             ================================================== -->
 
-            <div class="courses-card">
+            <div class="enrollment-card">
 
 
                 <!-- HEADER -->
 
-                <div class="courses-header">
+                <div class="enrollment-header">
 
 
                     <div>
 
                         <h2>
-                            All Courses
+                            All Enrollments
                         </h2>
 
                         <p>
-                            View and manage all submitted courses
+                            View and manage all student enrollments
                         </p>
 
                     </div>
 
 
-                    <div class="course-tools">
+                    <div class="tools">
 
 
                         <!-- SEARCH -->
 
-                        <div class="search-wrapper">
+                        <div class="search-box">
 
-                            <span class="search-icon">
+                            <span>
                                 🔍
                             </span>
 
                             <input
                                 type="text"
-                                id="courseSearch"
+                                id="searchInput"
                                 class="search-input"
-                                placeholder="Search courses...">
+                                placeholder="Search students or courses...">
 
                         </div>
 
 
-                        <!-- FILTER -->
+                        <!-- STATUS -->
 
                         <select
                             id="statusFilter"
@@ -1916,29 +1804,29 @@
                                 All Status
                             </option>
 
-                            <option value="pending">
-                                Pending
+                            <option value="active">
+                                Active
                             </option>
 
-                            <option value="approved">
-                                Approved
+                            <option value="completed">
+                                Completed
                             </option>
 
-                            <option value="rejected">
-                                Rejected
+                            <option value="cancelled">
+                                Cancelled
                             </option>
 
                         </select>
 
 
-                        <!-- REFRESH -->
+                        <!-- EXPORT -->
 
                         <button
                             type="button"
-                            class="refresh-btn"
-                            onclick="window.location.reload()">
+                            class="export-btn"
+                            onclick="exportTable()">
 
-                            + Refresh
+                            + Export
 
                         </button>
 
@@ -1953,7 +1841,8 @@
 
                 <div class="table-wrapper">
 
-                    <table class="courses-table">
+                    <table class="enrollment-table"
+                           id="enrollmentTable">
 
 
                         <thead>
@@ -1965,31 +1854,23 @@
                             </th>
 
                             <th>
-                                Thumbnail
+                                Student
                             </th>
 
                             <th>
-                                Course Title
+                                Course
                             </th>
 
                             <th>
-                                Teacher
+                                Enrolled At
                             </th>
 
                             <th>
-                                Category
-                            </th>
-
-                            <th>
-                                Price
+                                Progress
                             </th>
 
                             <th>
                                 Status
-                            </th>
-
-                            <th>
-                                Created At
                             </th>
 
                             <th>
@@ -2001,25 +1882,37 @@
                         </thead>
 
 
-                        <tbody id="courseTableBody">
+                        <tbody>
 
 
-                        @forelse($courses as $index => $course)
+                        @forelse($enrollments as $index => $enrollment)
 
 
                             @php
 
-                                $courseStatus =
-                                    strtolower(
-                                        $course->status ?? 'pending'
-                                    );
+                                $student =
+                                    $enrollment->student
+                                    ?? null;
+
+                                $course =
+                                    $enrollment->course
+                                    ?? null;
 
 
-                                /*
-                                |--------------------------------------------------------------------------
-                                | Optional Course Data
-                                |--------------------------------------------------------------------------
-                                */
+                                $studentName =
+                                    $student->name
+                                    ?? 'Student';
+
+
+                                $studentEmail =
+                                    $student->email
+                                    ?? '';
+
+
+                                $courseTitle =
+                                    $course->title
+                                    ?? 'Course';
+
 
                                 $category =
                                     $course->category
@@ -2027,166 +1920,60 @@
                                     ?? 'Programming';
 
 
-                                $price =
-                                    $course->price
-                                    ?? null;
+                                $status =
+                                    strtolower(
+                                        $enrollment->status
+                                        ?? 'active'
+                                    );
 
 
-                                $teacherName = 'Teacher';
+                                $progress =
+                                    $enrollment->progress
+                                    ?? 0;
 
-                                $teacherEmail = '';
 
+                                if ($progress >= 100) {
 
-                                /*
-                                |--------------------------------------------------------------------------
-                                | Try teacher relation safely
-                                |--------------------------------------------------------------------------
-                                */
-
-                                if (
-                                    method_exists(
-                                        $course,
-                                        'teacher'
-                                    )
-                                ) {
-
-                                    $teacher =
-                                        $course->teacher;
-
-                                    if ($teacher) {
-
-                                        $teacherName =
-                                            $teacher->name
-                                            ?? 'Teacher';
-
-                                        $teacherEmail =
-                                            $teacher->email
-                                            ?? '';
-
-                                    }
+                                    $status = 'completed';
 
                                 }
 
-
-                                /*
-                                |--------------------------------------------------------------------------
-                                | Try user relation
-                                |--------------------------------------------------------------------------
-                                */
-
-                                if (
-                                    $teacherName === 'Teacher' &&
-                                    method_exists(
-                                        $course,
-                                        'user'
-                                    )
-                                ) {
-
-                                    $teacher =
-                                        $course->user;
-
-                                    if ($teacher) {
-
-                                        $teacherName =
-                                            $teacher->name
-                                            ?? 'Teacher';
-
-                                        $teacherEmail =
-                                            $teacher->email
-                                            ?? '';
-
-                                    }
-
-                                }
 
                             @endphp
 
 
                             <tr
-                                data-status="{{ $courseStatus }}"
+                                data-status="{{ $status }}"
                                 data-search="{{ strtolower(
-                                    ($course->title ?? '') .
+                                    $studentName .
                                     ' ' .
-                                    ($category ?? '') .
+                                    $studentEmail .
                                     ' ' .
-                                    ($teacherName ?? '')
+                                    $courseTitle
                                 ) }}">
 
 
                                 <!-- NUMBER -->
 
                                 <td>
+
                                     {{ $index + 1 }}
-                                </td>
-
-
-                                <!-- THUMBNAIL -->
-
-                                <td>
-
-                                    <div class="course-thumbnail">
-
-                                        @if(
-                                            isset($course->thumbnail)
-                                            && $course->thumbnail
-                                        )
-
-                                            <img
-                                                src="{{ asset('storage/' . $course->thumbnail) }}"
-                                                alt="Course">
-
-                                        @elseif(
-                                            isset($course->image)
-                                            && $course->image
-                                        )
-
-                                            <img
-                                                src="{{ asset('storage/' . $course->image) }}"
-                                                alt="Course">
-
-                                        @else
-
-                                            📚
-
-                                        @endif
-
-                                    </div>
 
                                 </td>
 
 
-                                <!-- TITLE -->
+                                <!-- STUDENT -->
 
                                 <td>
 
-                                    <div class="course-title">
-
-                                        {{ $course->title ?? 'Untitled Course' }}
-
-                                    </div>
+                                    <div class="student-cell">
 
 
-                                    <div class="course-description">
-
-                                        {{ $course->description ?? 'Course description' }}
-
-                                    </div>
-
-                                </td>
-
-
-                                <!-- TEACHER -->
-
-                                <td>
-
-                                    <div class="teacher-cell">
-
-
-                                        <div class="teacher-avatar">
+                                        <div class="student-avatar">
 
                                             {{ strtoupper(
                                                 substr(
-                                                    $teacherName,
+                                                    $studentName,
                                                     0,
                                                     1
                                                 )
@@ -2197,22 +1984,18 @@
 
                                         <div>
 
-                                            <div class="teacher-name">
+                                            <div class="student-name">
 
-                                                {{ $teacherName }}
+                                                {{ $studentName }}
 
                                             </div>
 
 
-                                            @if($teacherEmail)
+                                            <div class="student-email">
 
-                                                <div class="teacher-email">
+                                                {{ $studentEmail }}
 
-                                                    {{ $teacherEmail }}
-
-                                                </div>
-
-                                            @endif
+                                            </div>
 
                                         </div>
 
@@ -2221,36 +2004,91 @@
                                 </td>
 
 
-                                <!-- CATEGORY -->
+                                <!-- COURSE -->
 
                                 <td>
 
-                                    <span class="category-badge">
+                                    <div class="course-cell">
 
-                                        {{ $category }}
 
-                                    </span>
+                                        <div class="course-thumb">
+
+                                            @if(
+                                                isset($course->thumbnail)
+                                                && $course->thumbnail
+                                            )
+
+                                                <img
+                                                    src="{{ asset('storage/' . $course->thumbnail) }}"
+                                                    alt="Course">
+
+                                            @else
+
+                                                📚
+
+                                            @endif
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <div class="course-name">
+
+                                                {{ $courseTitle }}
+
+                                            </div>
+
+
+                                            <span class="category">
+
+                                                {{ $category }}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
 
                                 </td>
 
 
-                                <!-- PRICE -->
+                                <!-- DATE -->
 
                                 <td>
 
-                                    <span class="price">
+                                    {{ $enrollment->created_at
+                                        ? $enrollment->created_at->format('M d, Y')
+                                        : 'N/A'
+                                    }}
 
-                                        @if($price !== null)
+                                </td>
 
-                                            ৳{{ number_format((float)$price, 2) }}
 
-                                        @else
+                                <!-- PROGRESS -->
 
-                                            Free
+                                <td>
 
-                                        @endif
+                                    <div class="progress-wrapper">
 
-                                    </span>
+
+                                        <div class="progress-bar">
+
+                                            <div
+                                                class="progress-fill"
+                                                style="width: {{ min(100, max(0, $progress)) }}%;">
+                                            </div>
+
+                                        </div>
+
+
+                                        <span class="progress-text">
+
+                                            {{ $progress }}%
+
+                                        </span>
+
+                                    </div>
 
                                 </td>
 
@@ -2260,52 +2098,40 @@
                                 <td>
 
 
-                                    @if($courseStatus === 'approved')
+                                    @if($status === 'completed')
 
-                                        <span class="status-badge approved">
+                                        <span class="status status-completed">
 
                                             <span class="status-dot"></span>
 
-                                            Approved
+                                            Completed
 
                                         </span>
 
 
-                                    @elseif($courseStatus === 'rejected')
+                                    @elseif($status === 'cancelled')
 
-                                        <span class="status-badge rejected">
+                                        <span class="status status-cancelled">
 
                                             <span class="status-dot"></span>
 
-                                            Rejected
+                                            Cancelled
 
                                         </span>
 
 
                                     @else
 
-                                        <span class="status-badge pending">
+                                        <span class="status status-active">
 
                                             <span class="status-dot"></span>
 
-                                            Pending
+                                            Active
 
                                         </span>
 
                                     @endif
 
-
-                                </td>
-
-
-                                <!-- DATE -->
-
-                                <td>
-
-                                    {{ $course->created_at
-                                        ? $course->created_at->format('M d, Y')
-                                        : 'N/A'
-                                    }}
 
                                 </td>
 
@@ -2317,61 +2143,29 @@
                                     <div class="actions">
 
 
-                                        <!-- APPROVE -->
+                                        <!-- VIEW -->
 
-                                        @if($courseStatus !== 'approved')
+                                        <button
+                                            type="button"
+                                            class="view-btn"
+                                            onclick="viewEnrollment(
+                                                '{{ $studentName }}',
+                                                '{{ $courseTitle }}',
+                                                '{{ $progress }}',
+                                                '{{ ucfirst($status) }}'
+                                            )">
 
-                                            <form
-                                                action="{{ route('admin.course.approve', $course->id) }}"
-                                                method="POST">
+                                            👁
 
-                                                @csrf
-
-                                                <button
-                                                    type="submit"
-                                                    class="action-btn approve-btn">
-
-                                                    ✓ Approve
-
-                                                </button>
-
-                                            </form>
-
-                                        @endif
-
-
-                                        <!-- REJECT -->
-
-                                        @if($courseStatus !== 'rejected')
-
-                                            <form
-                                                action="{{ route('admin.course.reject', $course->id) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Are you sure you want to reject this course?');">
-
-                                                @csrf
-
-                                                @method('DELETE')
-
-                                                <button
-                                                    type="submit"
-                                                    class="action-btn reject-btn">
-
-                                                    ✕ Reject
-
-                                                </button>
-
-                                            </form>
-
-                                        @endif
+                                        </button>
 
 
                                         <!-- DELETE -->
 
                                         <form
-                                            action="{{ route('admin.course.delete', $course->id) }}"
+                                            action="#"
                                             method="POST"
-                                            onsubmit="return confirm('Are you sure you want to permanently delete this course?');">
+                                            onsubmit="return confirm('Are you sure you want to delete this enrollment?');">
 
                                             @csrf
 
@@ -2379,7 +2173,7 @@
 
                                             <button
                                                 type="submit"
-                                                class="action-btn delete-btn">
+                                                class="delete-btn">
 
                                                 🗑
 
@@ -2401,20 +2195,20 @@
 
                             <tr>
 
-                                <td colspan="9">
+                                <td colspan="7">
 
                                     <div class="empty-state">
 
-                                        <div class="empty-state-icon">
-                                            📚
+                                        <div class="empty-icon">
+                                            🎓
                                         </div>
 
                                         <strong>
-                                            No courses found
+                                            No enrollments found
                                         </strong>
 
                                         <p style="margin-top:6px;">
-                                            No courses have been submitted yet.
+                                            No students have enrolled in any course yet.
                                         </p>
 
                                     </div>
@@ -2434,58 +2228,41 @@
                 </div>
 
 
-                <!-- =================================================
-                     FOOTER
-                ================================================== -->
+                <!-- FOOTER -->
 
                 <div class="table-footer">
 
-                    <div id="courseCount">
+                    <div id="resultCount">
 
                         Showing
                         <strong>
-                            {{ $courses->count() }}
+                            {{ $enrollments->count() }}
                         </strong>
-                        courses
+                        enrollments
 
                     </div>
 
 
                     <div class="pagination">
 
-                        <button
-                            class="page-btn"
-                            type="button">
-
+                        <button class="page-btn">
                             ‹
-
                         </button>
 
-
-                        <button
-                            class="page-btn active"
-                            type="button">
-
+                        <button class="page-btn active">
                             1
-
                         </button>
 
-
-                        <button
-                            class="page-btn"
-                            type="button">
-
+                        <button class="page-btn">
                             2
-
                         </button>
 
+                        <button class="page-btn">
+                            3
+                        </button>
 
-                        <button
-                            class="page-btn"
-                            type="button">
-
+                        <button class="page-btn">
                             ›
-
                         </button>
 
                     </div>
@@ -2502,33 +2279,22 @@
 </div>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-====================================================== -->
-
 <script>
 
 
     /* =====================================================
-       SEARCH + FILTER
+       SEARCH + STATUS FILTER
     ====================================================== */
 
     const searchInput =
-        document.getElementById('courseSearch');
+        document.getElementById('searchInput');
 
 
     const statusFilter =
         document.getElementById('statusFilter');
 
 
-    const rows =
-        document.querySelectorAll(
-            '#courseTableBody tr'
-        );
-
-
-    function filterCourses() {
-
+    function filterEnrollments() {
 
         const search =
             searchInput.value
@@ -2536,41 +2302,47 @@
                 .trim();
 
 
-        const selectedStatus =
+        const status =
             statusFilter.value;
 
 
-        let visibleCount = 0;
+        const rows =
+            document.querySelectorAll(
+                '#enrollmentTable tbody tr'
+            );
+
+
+        let visible =
+            0;
 
 
         rows.forEach(function(row) {
+
+            const rowSearch =
+                row.dataset.search || '';
 
 
             const rowStatus =
                 row.dataset.status || '';
 
 
-            const rowSearch =
-                row.dataset.search || '';
-
-
-            const matchesSearch =
+            const searchMatch =
                 rowSearch.includes(search);
 
 
-            const matchesStatus =
-                selectedStatus === 'all' ||
-                rowStatus === selectedStatus;
+            const statusMatch =
+                status === 'all' ||
+                rowStatus === status;
 
 
             if (
-                matchesSearch &&
-                matchesStatus
+                searchMatch &&
+                statusMatch
             ) {
 
                 row.style.display = '';
 
-                visibleCount++;
+                visible++;
 
             } else {
 
@@ -2582,26 +2354,140 @@
 
 
         document.getElementById(
-            'courseCount'
+            'resultCount'
         ).innerHTML =
             'Showing <strong>' +
-            visibleCount +
-            '</strong> courses';
+            visible +
+            '</strong> enrollments';
 
     }
 
 
     searchInput.addEventListener(
         'input',
-        filterCourses
+        filterEnrollments
     );
 
 
     statusFilter.addEventListener(
         'change',
-        filterCourses
+        filterEnrollments
     );
 
+
+    /* =====================================================
+       VIEW ENROLLMENT
+    ====================================================== */
+
+    function viewEnrollment(
+        student,
+        course,
+        progress,
+        status
+    ) {
+
+        alert(
+            'Student: ' +
+            student +
+            '\n\n' +
+
+            'Course: ' +
+            course +
+            '\n\n' +
+
+            'Progress: ' +
+            progress +
+            '%\n\n' +
+
+            'Status: ' +
+            status
+        );
+
+    }
+
+
+    /* =====================================================
+       EXPORT
+    ====================================================== */
+
+    function exportTable() {
+
+        const table =
+            document.getElementById(
+                'enrollmentTable'
+            );
+
+
+        let csv = [];
+
+
+        const rows =
+            table.querySelectorAll(
+                'tr'
+            );
+
+
+        rows.forEach(function(row) {
+
+            const cols =
+                row.querySelectorAll(
+                    'th, td'
+                );
+
+
+            let rowData = [];
+
+
+            cols.forEach(function(col) {
+
+                rowData.push(
+                    '"' +
+                    col.innerText
+                        .replace(/"/g, '""')
+                        .replace(/\n/g, ' ')
+                    +
+                    '"'
+                );
+
+            });
+
+
+            csv.push(
+                rowData.join(',')
+            );
+
+        });
+
+
+        const blob =
+            new Blob(
+                [csv.join('\n')],
+                {
+                    type: 'text/csv;charset=utf-8;'
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const link =
+            document.createElement('a');
+
+
+        link.href = url;
+
+        link.download =
+            'learnhub-enrollments.csv';
+
+
+        link.click();
+
+
+        URL.revokeObjectURL(url);
+
+    }
 
 </script>
 

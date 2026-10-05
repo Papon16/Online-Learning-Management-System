@@ -3,101 +3,415 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Enrollment;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
 {
-     public function dashboard()
-    {
-        $totalUsers = User::count();
-        $totalTeachers = User::where('role', 'teacher')->count();
-        $totalStudents = User::where('role', 'student')->count();
-        $totalCourses = Course::count();
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN DASHBOARD
+    |--------------------------------------------------------------------------
+    */
 
-        return view('admin.dashboard', compact(
-            'totalUsers',
-            'totalTeachers',
-            'totalStudents',
-            'totalCourses'
-        ));
-    }
-public function users()
+    public function dashboard()
     {
         $users = User::latest()->get();
-        return view('admin.users', compact('users'));
+
+        $totalUsers = User::count();
+
+        $studentCount = User::where(
+            'role',
+            'student'
+        )->count();
+
+        $teacherCount = User::where(
+            'role',
+            'teacher'
+        )->count();
+
+        $adminCount = User::where(
+            'role',
+            'admin'
+        )->count();
+
+
+        // Course statistics
+
+        $totalCourses = Course::count();
+
+        $approvedCourses = Course::where(
+            'status',
+            'approved'
+        )->count();
+
+        $pendingCourses = Course::where(
+            'status',
+            'pending'
+        )->count();
+
+        $rejectedCourses = Course::where(
+            'status',
+            'rejected'
+        )->count();
+
+
+        return view(
+            'admin.dashboard',
+            compact(
+                'users',
+                'totalUsers',
+                'studentCount',
+                'teacherCount',
+                'adminCount',
+                'totalCourses',
+                'approvedCourses',
+                'pendingCourses',
+                'rejectedCourses'
+            )
+        );
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | USERS
+    |--------------------------------------------------------------------------
+    */
+
+    public function index()
+    {
+        $users = User::latest()->get();
+
+        $totalUsers = User::count();
+
+        $studentCount = User::where(
+            'role',
+            'student'
+        )->count();
+
+        $teacherCount = User::where(
+            'role',
+            'teacher'
+        )->count();
+
+        $adminCount = User::where(
+            'role',
+            'admin'
+        )->count();
+
+
+        // Course statistics
+
+        $totalCourses = Course::count();
+
+        $approvedCourses = Course::where(
+            'status',
+            'approved'
+        )->count();
+
+        $pendingCourses = Course::where(
+            'status',
+            'pending'
+        )->count();
+
+        $rejectedCourses = Course::where(
+            'status',
+            'rejected'
+        )->count();
+
+
+        return view(
+            'admin.dashboard',
+            compact(
+                'users',
+                'totalUsers',
+                'studentCount',
+                'teacherCount',
+                'adminCount',
+                'totalCourses',
+                'approvedCourses',
+                'pendingCourses',
+                'rejectedCourses'
+            )
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE USER
+    |--------------------------------------------------------------------------
+    */
+
+    public function create()
+    {
+        return redirect()->route(
+            'admin.dashboard'
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | STORE USER
+    |--------------------------------------------------------------------------
+    */
+
+    public function store(Request $request)
+    {
+        $request->validate([
+
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                'unique:users,email',
+            ],
+
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+            ],
+
+            'role' => [
+                'required',
+                'in:student,teacher,admin',
+            ],
+
+        ]);
+
+
+        User::create([
+
+            'name' => $request->name,
+
+            'email' => $request->email,
+
+            'password' => Hash::make(
+                $request->password
+            ),
+
+            'role' => $request->role,
+
+        ]);
+
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with(
+                'success',
+                '✅ User created successfully!'
+            );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DELETE USER
+    |--------------------------------------------------------------------------
+    */
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+
+
+        if ($user->id === auth()->id()) {
+
+            return back()->with(
+                'error',
+                '❌ You cannot delete your own account.'
+            );
+        }
+
+
+        $user->delete();
+
+
+        return back()->with(
+            'success',
+            '✅ User deleted successfully!'
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | REJECT USER
+    |--------------------------------------------------------------------------
+    */
+
+    public function rejectUser($id)
+    {
+        $user = User::findOrFail($id);
+
+
+        if ($user->id === auth()->id()) {
+
+            return back()->with(
+                'error',
+                '❌ You cannot reject your own account.'
+            );
+        }
+
+
+        $user->delete();
+
+
+        return back()->with(
+            'success',
+            '✅ User rejected and removed successfully!'
+        );
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | COURSES
+    |--------------------------------------------------------------------------
+    */
 
     public function courses()
     {
         $courses = Course::latest()->get();
-        return view('admin.courses', compact('courses'));
+
+
+        return view(
+            'admin.courses',
+            compact('courses')
+        );
     }
 
-public function deleteUser($id)
-{
-    User::findOrFail($id)->delete();
 
-    return back()->with('success', 'User deleted successfully');
-}
-public function approveCourse($id)
-{
-    $course = \App\Models\Course::findOrFail($id);
-    $course->status = 'approved';
-    $course->save();
+    /*
+    |--------------------------------------------------------------------------
+    | APPROVE COURSE
+    |--------------------------------------------------------------------------
+    */
 
-    return back();
-}
-
-public function rejectCourse($id)
-{
-    $course = \App\Models\Course::findOrFail($id);
-    $course->status = 'rejected';
-    $course->save();
-
-    return back();
-}
-public function deleteCourse($id)
-{
-    Course::findOrFail($id)->delete();
-
-    return back()->with('success', 'Course deleted successfully!');
-}
-
-    // 📋 All users
-    public function index()
+    public function approveCourse($id)
     {
-        $users = User::all();
-        return view('admin.users', compact('users'));
+        $course = Course::findOrFail($id);
+
+
+        $course->status = 'approved';
+
+        $course->save();
+
+
+        return back()->with(
+            'success',
+            '✅ Course approved successfully!'
+        );
     }
 
-    // ➕ Create form
-    public function create()
+
+    /*
+    |--------------------------------------------------------------------------
+    | REJECT COURSE
+    |--------------------------------------------------------------------------
+    */
+
+    public function rejectCourse($id)
     {
-        return view('admin.create-user');
+        $course = Course::findOrFail($id);
+
+
+        $course->status = 'rejected';
+
+        $course->save();
+
+
+        return back()->with(
+            'success',
+            '❌ Course rejected successfully!'
+        );
     }
 
-    // 💾 Store user
-    public function store(Request $request)
+
+    /*
+    |--------------------------------------------------------------------------
+    | DELETE COURSE
+    |--------------------------------------------------------------------------
+    */
+
+    public function deleteCourse($id)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role
-        ]);
+        $course = Course::findOrFail($id);
 
-        return redirect()->route('admin.users')->with('success', 'User created!');
+
+        $course->delete();
+
+
+        return back()->with(
+            'success',
+            '✅ Course deleted successfully!'
+        );
     }
 
-    // 🗑 Delete
-    public function delete($id)
+
+    /*
+    |--------------------------------------------------------------------------
+    | ENROLLMENTS
+    |--------------------------------------------------------------------------
+    */
+
+    public function enrollments()
     {
-        User::findOrFail($id)->delete();
+        $enrollments = Enrollment::with([
+            'student',
+            'course'
+        ])
+        ->latest()
+        ->get();
 
-        return back()->with('success', 'User deleted!');
+
+        $totalEnrollments =
+            $enrollments->count();
+
+
+        $activeEnrollments =
+            $enrollments
+                ->where('status', 'active')
+                ->count();
+
+
+        $completedEnrollments =
+            $enrollments
+                ->where('status', 'completed')
+                ->count();
+
+
+        $cancelledEnrollments =
+            $enrollments
+                ->where('status', 'cancelled')
+                ->count();
+
+
+        return view(
+            'admin.enrollments',
+            compact(
+                'enrollments',
+                'totalEnrollments',
+                'activeEnrollments',
+                'completedEnrollments',
+                'cancelledEnrollments'
+            )
+        );
     }
-    
+    public function messages()
+{
+    return view('admin.messages');
 }
-
+}
